@@ -6,6 +6,8 @@ public class ManagedUpdateBehaviour : MonoBehaviour
 {
 	[System.NonSerialized] public bool set = false;
 
+	public Transform myTransform;
+
 	protected virtual void Awake()
 	{
 		if (set)
@@ -13,6 +15,7 @@ public class ManagedUpdateBehaviour : MonoBehaviour
 		UpdateManager.Instance.Add(this); //このスクリプトをUpdateManagerの配列に加える
 		Initialize();
 		set = true;
+		myTransform = GetComponent<Transform>();
 	}
 
 	protected virtual void Initialize() //Awakeの代わりの処理を書く
