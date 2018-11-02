@@ -6,7 +6,7 @@ public class ManagedUpdateBehaviour : MonoBehaviour
 {
 	[System.NonSerialized] public bool set = false;
 
-	public Transform myTransform;
+	[System.NonSerialized] public Transform myTransform;
 
 	protected virtual void Awake()
 	{
