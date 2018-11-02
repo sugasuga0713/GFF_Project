@@ -89,6 +89,15 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 		inputDir.x = Input.GetAxis(InputCommand.Horizontal.ToString());
 		inputDir.y = Input.GetAxis(InputCommand.Vertical.ToString());
 		playerController.MoveDir = inputDir;
+
+		if (Input.GetKeyDown(KeyCode.O))
+		{
+			playerController.Action(PlayerController.Hand.LEFT);
+		}
+		if(Input.GetKeyDown(KeyCode.P))
+		{
+			playerController.Action(PlayerController.Hand.RIGHT);
+		}
 	}
 
 }

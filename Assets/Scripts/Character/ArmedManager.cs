@@ -12,32 +12,34 @@ public class ArmedManager : ManagedUpdateBehaviour
 	#region 変数
 
 	#region パラメータ
-	private bool canUseLeftHand = true; //左手を使えるかどうか
-	private bool canUseRightHand = true; //右手を使えるかどうか
+	private bool leftHandHas = false; //左手に物を持っているか
+	private bool rightHandHas = false; //右手に物を持っているか
 
 	private BaseObject objectLeft; //左手で持っているオブジェクト
 	private BaseObject objectRight; //右手で持っているオブジェクト
-    #endregion
 
-    #region キャッシュ
+	#endregion
 
-    #endregion
+	#region キャッシュ
+	[Header("左手で持つオブジェクトの位置")] [SerializeField] private Transform leftHandPoint = null;
+	[Header("右手で持つオブジェクトの位置")] [SerializeField] private Transform rightHandPoint = null;
+	#endregion
 
-    #endregion
+	#endregion
 
-    #region プロパティ
-	public bool CanUseLeftHand
+	#region プロパティ
+	public bool LeftHandHas
 	{
 		get
 		{
-			return canUseLeftHand;
+			return leftHandHas;
 		}
 	}
-	public bool CanUseRightHand
+	public bool RightHandHas
 	{
 		get
 		{
-			return canUseRightHand;
+			return rightHandHas;
 		}
 	}
 
@@ -57,28 +59,55 @@ public class ArmedManager : ManagedUpdateBehaviour
 	}
 	#endregion
 
-	public void PickUp(bool left,BaseObject obj)
+	public void PickUp(PlayerController.Hand hand, BaseObject obj)
 	{
-		if (left)
+		if (hand == PlayerController.Hand.LEFT)
 		{
-			canUseLeftHand = false;
+			leftHandHas = true;
 			objectLeft = obj;
+			obj.myTransform.position = leftHandPoint.position;
+			obj.myTransform.parent = leftHandPoint;
 		}
 		else
 		{
-			canUseRightHand = false;
+			rightHandHas = true;
 			objectRight = obj;
+			obj.myTransform.position = rightHandPoint.position;
+			obj.myTransform.parent = rightHandPoint;
+		}
+		obj.IsHaved = true;
+		obj.GetComponent<Rigidbody>().isKinematic = true;
+		
+	}
+
+	public void Throw(PlayerController.Hand hand)
+	{
+		if (hand == PlayerController.Hand.LEFT)
+		{
+			leftHandHas = false;
+			objectLeft.IsHaved = false;
+			objectLeft.myTransform.parent = null;
+			objectLeft.GetComponent<Rigidbody>().isKinematic = false;
+			objectLeft = null;
+		}
+		else
+		{
+			rightHandHas = false;
+			objectRight.IsHaved = false;
+			objectRight.myTransform.parent = null;
+			objectRight.GetComponent<Rigidbody>().isKinematic = false;
+			objectRight = null;
 		}
 	}
 
-	public int GetGrossWeight()
+	public int GetGrossWeight(int playerWeight)
 	{
-		int weight = 0;
-		if (!canUseLeftHand)
+		int weight = playerWeight;
+		if (leftHandHas)
 		{
 			weight += objectLeft.MyWeight;
 		}
-		if(!canUseRightHand)
+		if(rightHandHas)
 		{
 			weight += objectRight.MyWeight;
 		}
@@ -92,7 +121,7 @@ public class ArmedManager : ManagedUpdateBehaviour
 	/// <returns></returns>
 	public bool GetHasObject()
 	{
-		if (!canUseLeftHand || !canUseRightHand)
+		if (leftHandHas || rightHandHas)
 			return true;
 		else
 			return false;

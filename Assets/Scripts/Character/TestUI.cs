@@ -57,8 +57,8 @@ public class TestUI : ManagedUpdateBehaviour
 
 	private void ShowText()
 	{
-		weightText.text = "総重量 : " + armedManager.GetGrossWeight().ToString() + "kg";
-		if (!armedManager.CanUseLeftHand)
+		weightText.text = "総重量 : " + playerController.GrossWeight.ToString() + "kg";
+		if (armedManager.LeftHandHas)
 		{
 			leftHandText.text = "左手 : " + armedManager.ObjectLeft.Name.ToString();
 		}
@@ -66,7 +66,7 @@ public class TestUI : ManagedUpdateBehaviour
 		{
 			leftHandText.text = "左手 : " + "なし";
 		}
-		if (!armedManager.CanUseRightHand)
+		if (armedManager.RightHandHas)
 		{
 			rightHandText.text = "右手 : " + armedManager.ObjectRight.Name.ToString();
 		}

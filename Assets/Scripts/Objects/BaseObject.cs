@@ -12,10 +12,12 @@ public class BaseObject : ManagedUpdateBehaviour
 	#region 変数
 
 	#region パラメータ
-	[Header("名前")] [SerializeField] private string name = "";
+	[Header("名前")] [SerializeField] private string objName = "";
 	[Header("耐久値")] [SerializeField] private int hp = 100;
 	[Header("攻撃力")] [SerializeField] private int attackPower = 10;
 	[Header("自分の重量(kg)")] [SerializeField] private int myWeight = 300;
+
+	private bool isHaved = false; //プレイヤーに持たれている
 	#endregion
 
 	#region キャッシュ
@@ -29,7 +31,7 @@ public class BaseObject : ManagedUpdateBehaviour
 	{
 		get
 		{
-			return name;
+			return objName;
 		}
 	}
 	public int Hp
@@ -52,6 +54,18 @@ public class BaseObject : ManagedUpdateBehaviour
 		get
 		{
 			return myWeight;
+		}
+	}
+
+	public bool IsHaved
+	{
+		get
+		{
+			return isHaved;
+		}
+		set
+		{
+			isHaved = value;
 		}
 	}
 	#endregion

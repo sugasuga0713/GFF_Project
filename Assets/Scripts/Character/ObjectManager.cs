@@ -13,8 +13,8 @@ public class ObjectManager : ManagedUpdateBehaviour
 
 	#region パラメータ
 	[Header("区画の数")] [SerializeField] private int area = 9;
+	[Header("拾う距離")] [SerializeField] private float pickUpDistance = 1.75f;
 	public List<List<BaseObject>> baseObjectList = new List<List<BaseObject>>();
-
 
 	#endregion
 
@@ -35,23 +35,28 @@ public class ObjectManager : ManagedUpdateBehaviour
 	{
 		base.Initialize();
 		SetUp();
-		
+		StartAddObject();
 	}
 
 	public BaseObject GetObjectInRange(int areaNo,Vector3 pos)
 	{
 		int size = baseObjectList[areaNo].Count;
-		BaseObject obj = baseObjectList[areaNo][0];
-		float distance = Vector3.Distance(baseObjectList[areaNo][0].myTransform.position,pos);
+		BaseObject obj = null;
+		float distance = pickUpDistance;
 		for(i = 0; i < size; i++)
 		{
+			if (baseObjectList[areaNo][i].IsHaved) continue; //プレイヤーが現在持っているオブジェクトはスルーする
+
 			if(distance > Vector3.Distance(baseObjectList[areaNo][i].myTransform.position, pos))
 			{
 				obj = baseObjectList[areaNo][i];
 				distance = Vector3.Distance(baseObjectList[areaNo][i].myTransform.position, pos);
 			}
 		}
-		return obj;
+		if (distance > pickUpDistance)
+			return null;
+		else
+			return obj;
 	}
 
 	public void AddObject(int areaNo,BaseObject obj)
@@ -59,11 +64,20 @@ public class ObjectManager : ManagedUpdateBehaviour
 		baseObjectList[areaNo].Add(obj);
 	}
 
+	public void StartAddObject()
+	{
+		GameObject[] baseObjects = GameObject.FindGameObjectsWithTag("DynamicObject");
+		for(i = 0;i<baseObjects.Length;i++)
+		{
+			AddObject(0, baseObjects[i].GetComponent<BaseObject>());
+		}
+	}
+
 	public void SetUp()
 	{
 		for(i = 0; i < area; i++)
 		{
-			baseObjectList.Add(null);
+			baseObjectList.Add(new List<BaseObject>());
 		}
 	}
 }

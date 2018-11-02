@@ -10,7 +10,10 @@ using UnityEngine;
 public class PlayerController : ManagedUpdateBehaviour
 {
 	#region 変数
-
+	public enum Hand
+	{
+		RIGHT,LEFT
+	}
 	#region パラメータ
 	
 	[Header("プレイヤー番号")] [SerializeField] private int playerNo = 1; //プレイヤー番号　1～4
@@ -27,6 +30,7 @@ public class PlayerController : ManagedUpdateBehaviour
 	#region キャッシュ
 	private new Rigidbody rigidbody;
 	private ArmedManager armedManager;
+	[Header("ObjectManagerをアタッチ")][SerializeField] private ObjectManager objectManager = null;
 	#endregion
 
 	#endregion
@@ -115,7 +119,7 @@ public class PlayerController : ManagedUpdateBehaviour
 	{
 		if (armedManager.GetHasObject())
 		{
-			grossWeight = armedManager.GetGrossWeight();
+			grossWeight = armedManager.GetGrossWeight(myWeight);
 		}
 		else
 		{
@@ -139,28 +143,28 @@ public class PlayerController : ManagedUpdateBehaviour
 		rigidbody.velocity = moveDir * moveSpeed * Time.deltaTime;
 	}
 
-	public void Action(bool left)
+	public void Action(Hand hand)
 	{
-		if (left)
+		if (hand == Hand.LEFT)
 		{
-			if (armedManager.CanUseLeftHand)
+			if (!armedManager.LeftHandHas)
 			{
-				PickUp(left);
+				PickUp(hand);
 			}
 			else
 			{
-				Throw(left);
+				Throw(hand);
 			}
 		}
 		else
 		{
-			if (armedManager.CanUseRightHand)
+			if (!armedManager.RightHandHas)
 			{
-				PickUp(!left);
+				PickUp(hand);
 			}
 			else
 			{
-				Throw(!left);
+				Throw(hand);
 			}
 		}
 	}
@@ -168,17 +172,21 @@ public class PlayerController : ManagedUpdateBehaviour
 	/// <summary>
 	/// 落ちているものを拾って装備する
 	/// </summary>
-	public void PickUp(bool left)
+	public void PickUp(Hand hand)
 	{
+		BaseObject obj = objectManager.GetObjectInRange(0,myTransform.position);
 
+		if (obj == null) return;
+
+		armedManager.PickUp(hand,obj);
 	}
 
 	/// <summary>
 	/// 持っている物を投げる
 	/// </summary>
-	public void Throw(bool left)
+	public void Throw(Hand hand)
 	{
-
+		armedManager.Throw(hand);
 	}
 
 }
