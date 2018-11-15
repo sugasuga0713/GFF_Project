@@ -16,7 +16,7 @@ public class PlayerCameraController : ManagedUpdateBehaviour
 	[Header("追従のなめらかさ")] [SerializeField] private float smoothing = 5f;
 	[Header("カメラとの距離")] [SerializeField] private float distance = 5;
 	[Header("縦方向の回転上限")] [SerializeField] [Range(0, 90)] private float upperLimit = 45;
-	[Header("縦方向の回転下限")] [SerializeField] [Range(-30, 0)] private float lowerLimit = -2;
+	[Header("縦方向の回転下限")] [SerializeField] [Range(-45, 0)] private float lowerLimit = -2;
 
 	private Vector3 angle;
 	private Vector3 offset;
@@ -70,7 +70,7 @@ public class PlayerCameraController : ManagedUpdateBehaviour
 		angleX = Mathf.Clamp(angleX, lowerLimit, upperLimit);
 
 		viewPoint.SetEulerAngleX(angleX);
-		myTransform.LookAt(playerTransform.position);
+		myTransform.LookAt(viewPoint.position);
 
 	}
 

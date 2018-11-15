@@ -59,7 +59,12 @@ public class Building : ManagedUpdateBehaviour
 		this.gameObject.SetActive(false);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	/*private void OnCollisionEnter(Collision collision)
+	{
+		Impact();
+	}*/
+
+	private void OnTriggerEnter(Collider other)
 	{
 		Impact();
 	}

@@ -22,6 +22,7 @@ public class PlayerController : BaseObject
 	[Header("重量")] [SerializeField] private float weight = 1;
 	[Header("総重量(kg)")] [SerializeField] private float grossWeight = 300;
 
+	private bool canControl = false;
 	private Vector3 moveDir;
 
 	#endregion
@@ -124,6 +125,7 @@ public class PlayerController : BaseObject
 	/// </summary>
 	public void Move()
 	{
+		if (!canControl) return;
 	/*	// カメラの方向から、X-Z平面の単位ベクトルを取得
 		Vector3 cameraForward = Vector3.Scale(cameraTransform.up, new Vector3(1, 0, 1)).normalized;
 		if (cameraTransform.eulerAngles.x > 90)
@@ -142,6 +144,8 @@ public class PlayerController : BaseObject
 
 	public void Action1(Hand hand)
 	{
+		if (!canControl) return;
+
 		//左手ならhandNoに0、右手なら1が入る
 		int handNo = (int)hand; 
 
@@ -158,6 +162,8 @@ public class PlayerController : BaseObject
 
 	public void Action2(Hand hand)
 	{
+		if (!canControl) return;
+
 		//左手ならhandNoに0、右手なら1が入る
 		int handNo = (int)hand;
 
@@ -182,6 +188,8 @@ public class PlayerController : BaseObject
 	/// </summary>
 	public void PickUp(Hand hand)
 	{
+		if (!canControl) return;
+
 		Weapon obj = objectManager.GetObjectInRange(0,myTransform.position);
 
 		if (obj == null) return;
@@ -194,6 +202,8 @@ public class PlayerController : BaseObject
 	/// </summary>
 	public void ThrowAway(Hand hand)
 	{
+		if (!canControl) return;
+
 		armedManager.ThrowAway(hand);
 	}
 

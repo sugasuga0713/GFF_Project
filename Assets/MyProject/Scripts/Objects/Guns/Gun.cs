@@ -68,10 +68,10 @@ public class Gun : Weapon
 
 	protected void Shot()
 	{
-		remBullets--;
 		BaseBullet bullet = bulletManager.GetBullet(gunConfig.bulletType);
 		if (bullet == null) return;
 
+		remBullets--;
 		bullet.Setting(shotPosition);
 	}
 

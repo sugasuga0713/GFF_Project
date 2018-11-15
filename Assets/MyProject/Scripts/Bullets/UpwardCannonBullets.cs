@@ -46,6 +46,7 @@ public class UpwardCannonBullets : BaseBullet
 			lifeTimeCount = lifeTime;
 			myTransform.position = gunTransform.position;
 			gameObject.SetActive(true);
+			rigidbody.velocity = Vector3.zero;
 			test.Shoot(new Vector3(0,0,0), myTransform.position,rigidbody);
 		}
 	}
@@ -53,6 +54,7 @@ public class UpwardCannonBullets : BaseBullet
 	private void OnTriggerEnter(Collider other)
 	{
 		CreateManager.Instance.CreateObject("explosion",myTransform.position,3.0f);
+		gameObject.SetActive(false);
 	}
 
 }
