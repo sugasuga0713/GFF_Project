@@ -3,8 +3,6 @@
 //機能　　　　：
 //最終更新日　：
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : BaseObject
@@ -20,7 +18,11 @@ public class Weapon : BaseObject
 
 	private int hp;
 	private bool isHaved = false; //プレイヤーに持たれている
+	private bool isBroken = false; //壊れているかどうか
+
 	public WeaponConfig weaponConfig;
+
+	private Transform opponentTransform;
 
 	#endregion
 
@@ -53,6 +55,19 @@ public class Weapon : BaseObject
 		}
 	}
 
+	public bool IsBroken
+	{
+		get
+		{
+			return isBroken;
+		}
+
+		set
+		{
+			isBroken = value;
+		}
+	}
+
 	#endregion
 	#endregion
 
@@ -68,6 +83,7 @@ public class Weapon : BaseObject
 		rigidbody.isKinematic = true;
 
 		myTransform.rotation = shotTransform.parent.rotation;
+		myTransform.eulerAngles = (weaponConfig.setAngle + myTransform.eulerAngles);
 	}
 
 	/// <summary>

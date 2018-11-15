@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : ManagedUpdateBehaviour
+public class UIManager : SingletonMonoBehaviour<UIManager>
 {
 	#region 変数
 
@@ -26,26 +26,7 @@ public class UIManager : ManagedUpdateBehaviour
 
 	#endregion
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	protected override void Initialize()
-	{
-		base.Initialize();
-	}
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	public override void UpdateMe()
-	{
-
-	}
-
-	/// <summary>
-	/// 固定更新処理
-	/// </summary>
-	public override void FixedUpdateMe()
+	public void ScoreDisplay(int playersNo)
 	{
 
 	}

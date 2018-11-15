@@ -88,6 +88,11 @@ public static class ExtensionMethods
 		trans.Rotate(new Vector3(0,value,0));
 	}
 
+	public static void SetEulerAngleX(this Transform trans, float value)
+	{
+		trans.eulerAngles = new Vector3(value,trans.eulerAngles.y,trans.eulerAngles.z);
+	}
+
 	/// <summary>
 	///	アフィン変換を行い、ベクトル(Vector2型)を返すプログラム
 	/// </summary>

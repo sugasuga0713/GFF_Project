@@ -12,14 +12,12 @@ public class BaseBullet : ManagedUpdateBehaviour
 	#region 変数
 
 	#region パラメータ
-	[Header("移動速度")] [SerializeField] private float moveSpeed = 10.0f;
-	[Header("時間")] [SerializeField] private float lifeTime = 3.0f;
-	[Header("移動方向")] [SerializeField] private Vector3 moveDir = Vector3.zero;
-	private float lifeTimeCount;
+	[Header("時間")] [SerializeField] protected float lifeTime = 3.0f;
+	[Header("移動方向")] [SerializeField] protected Vector3 moveDir = Vector3.zero;
+	protected float lifeTimeCount;
 	#endregion
 
 	#region キャッシュ
-
 	#endregion
 
 	#endregion
@@ -54,7 +52,7 @@ public class BaseBullet : ManagedUpdateBehaviour
     /// </summary>
 	public override void FixedUpdateMe()
 	{
-		Move();
+		//Move();
 	}
 
 	public virtual void Setting(Transform gunTransform)
@@ -66,13 +64,14 @@ public class BaseBullet : ManagedUpdateBehaviour
 		gameObject.SetActive(true);
 	}
 
-	private void Move()
-	{
-		myTransform.Translate(moveDir * moveSpeed * Time.deltaTime);
-	}
-
 	public bool ActiveSelf()
 	{
 		return gameObject.activeSelf;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		gameObject.SetActive(false);
+		lifeTimeCount = lifeTime;
 	}
 }

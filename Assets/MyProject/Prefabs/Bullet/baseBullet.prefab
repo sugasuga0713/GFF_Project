@@ -22,14 +22,14 @@ GameObject:
   - component: {fileID: 33900493058016282}
   - component: {fileID: 135348885983822444}
   - component: {fileID: 23008631971686696}
-  - component: {fileID: 114163552829071160}
+  - component: {fileID: 114071467363662710}
   m_Layer: 11
   m_Name: baseBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4145721137082298
 Transform:
   m_ObjectHideFlags: 1
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1606048222745004}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114163552829071160
+--- !u!114 &114071467363662710
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,12 +92,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606048222745004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da948377f65f0479df795772c7120d, type: 3}
+  m_Script: {fileID: 11500000, guid: 955d4c1c0c2148e42b5ca9767dbe2bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
   lifeTime: 3
   moveDir: {x: 0, y: 0, z: 1}
+  moveSpeed: 20
 --- !u!135 &135348885983822444
 SphereCollider:
   m_ObjectHideFlags: 1

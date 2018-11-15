@@ -10,9 +10,9 @@ using UnityEngine;
 public class ArmedManager : ManagedUpdateBehaviour
 {
 	#region 変数
-
 	#region パラメータ
 
+	private int playerNo;
 	//手に武器を持っているかどうか
 	/*[System.NonSerialized]*/ public bool[] hasHand = { false, false };
 
@@ -24,6 +24,8 @@ public class ArmedManager : ManagedUpdateBehaviour
 	#region キャッシュ
 	[Header("持つオブジェクトの位置")] [SerializeField] private Transform[] handPoint = { null, null };
 
+	private int i; 
+
 	#endregion
 
 	#endregion
@@ -31,6 +33,11 @@ public class ArmedManager : ManagedUpdateBehaviour
 	#region プロパティ
 
 	#endregion
+
+	public void SetUp(int no)
+	{
+		playerNo = no;
+	}
 
 	public void PickUp(PlayerController.Hand hand, Weapon obj)
 	{
@@ -61,6 +68,20 @@ public class ArmedManager : ManagedUpdateBehaviour
 		}
 
 		return weight;
+	}
+
+	public void BrokenCheck()
+	{
+		for(i = 0;i<2;i++)
+		{
+			if(hasHand[i])
+			{
+				if(handWeapons[i].IsBroken)
+				{
+					ThrowAway((PlayerController.Hand)i);
+				}
+			}
+		}
 	}
 
 	/// <summary>

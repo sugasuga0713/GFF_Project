@@ -11,11 +11,6 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 {
 	#region 変数
 
-	private enum InputCommand
-	{
-		Horizontal, Vertical, R_Horizontal, R_Vertical, L_PickUp, R_PickUp, L_Action, R_Action, CameraMode
-	}
-
 	#region パラメータ
 	private bool isConnectedGamePad = false;
 
@@ -24,7 +19,7 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 	#endregion
 
 	#region キャッシュ
-	[SerializeField] private CameraController cameraController = null;
+	[SerializeField] private PlayerCameraController cameraController = null;
 	[SerializeField] private Transform cameraPosTrans = null;
 	private PlayerController playerController;
 	#endregion
@@ -87,31 +82,31 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 	{
 		//移動の入力 左スティック
 		Vector2 inputDir = Vector2.zero;
-		inputDir.x = Input.GetAxis(InputCommand.Horizontal.ToString());
-		inputDir.y = Input.GetAxis(InputCommand.Vertical.ToString());
+		inputDir.x = Input.GetAxis(CommandName.Horizontal);
+		inputDir.y = Input.GetAxis(CommandName.Vertical);
 		playerController.MoveDir = inputDir;
 		//
 
 		//カメラの回転入力 右スティック
-		cameraController.AngleInput(Input.GetAxis(InputCommand.R_Horizontal.ToString()), Input.GetAxis(InputCommand.R_Vertical.ToString()));
+		cameraController.AngleInput(Input.GetAxis(CommandName.R_Horizontal), Input.GetAxis(CommandName.R_Vertical));
 
-		if(Input.GetButtonDown(InputCommand.CameraMode.ToString()))
+		if(Input.GetButtonDown(CommandName.CameraMode))
 		{
-			cameraController.SetCameraMode(cameraPosTrans,playerController.playerModel.eulerAngles,!cameraController.GetCameraMode());
+			//cameraController.SetCameraMode(cameraPosTrans,playerController.playerModel.eulerAngles,!cameraController.GetCameraMode());
 		}
 
 		//アクション1の入力 L,Rボタン
-		if (Input.GetButtonDown(InputCommand.L_PickUp.ToString()))
+		if (Input.GetButtonDown(CommandName.L_PickUp))
 		{
 			playerController.Action1(PlayerController.Hand.LEFT);
 		}
-		if (Input.GetButtonDown(InputCommand.R_PickUp.ToString()))
+		if (Input.GetButtonDown(CommandName.R_PickUp))
 		{
 			playerController.Action1(PlayerController.Hand.RIGHT);
 		}
 
 		//アクション2の入力 LT,RTボタン
-		if (Input.GetAxisRaw(InputCommand.L_Action.ToString()) >0)
+		if (Input.GetAxisRaw(CommandName.L_Action) >0)
 		{
 			if (!pushActL)
 			{
@@ -128,7 +123,7 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 			}
 			
 		}
-		if (Input.GetAxisRaw(InputCommand.R_Action.ToString()) > 0)
+		if (Input.GetAxisRaw(CommandName.R_Action) > 0)
 		{
 			if (!pushActR)
 			{
@@ -151,11 +146,11 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 	private void KeyboardInput()
 	{
 		Vector2 inputDir = Vector2.zero;
-		inputDir.x = Input.GetAxis(InputCommand.Horizontal.ToString());
-		inputDir.y = Input.GetAxis(InputCommand.Vertical.ToString());
+		inputDir.x = Input.GetAxis(CommandName.Horizontal);
+		inputDir.y = Input.GetAxis(CommandName.Vertical);
 		playerController.MoveDir = inputDir;
 
-		cameraController.AngleInput(Input.GetAxis(InputCommand.R_Horizontal.ToString()),Input.GetAxis(InputCommand.R_Vertical.ToString()));
+		cameraController.AngleInput(Input.GetAxis(CommandName.R_Horizontal),Input.GetAxis(CommandName.R_Vertical));
 
 		if (Input.GetKeyDown(KeyCode.O))
 		{

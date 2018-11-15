@@ -17,6 +17,7 @@ public class PlayerController : BaseObject
 	#region パラメータ
 	
 	[Header("プレイヤー番号")] [SerializeField] private int playerNo = 1; //プレイヤー番号　1～4
+	[Header("耐久値")] [SerializeField] private int hp = 100;
 	[Header("移動速度")] [SerializeField] private float moveSpeed = 10;
 	[Header("重量")] [SerializeField] private float weight = 1;
 	[Header("総重量(kg)")] [SerializeField] private float grossWeight = 300;
@@ -90,6 +91,7 @@ public class PlayerController : BaseObject
         base.Initialize();
 
 		armedManager = GetComponent<ArmedManager>();
+		armedManager.SetUp(playerNo);
 		//playerModel = myTransform.Find("model");
     }
 
@@ -100,6 +102,7 @@ public class PlayerController : BaseObject
 	{
 		if (armedManager.GetHasObject())
 		{
+			armedManager.BrokenCheck();
 			grossWeight = armedManager.GetGrossWeight(weight);
 		}
 		else
@@ -121,15 +124,18 @@ public class PlayerController : BaseObject
 	/// </summary>
 	public void Move()
 	{
-		// カメラの方向から、X-Z平面の単位ベクトルを取得
+	/*	// カメラの方向から、X-Z平面の単位ベクトルを取得
 		Vector3 cameraForward = Vector3.Scale(cameraTransform.up, new Vector3(1, 0, 1)).normalized;
-
+		if (cameraTransform.eulerAngles.x > 90)
+		{
+			cameraForward *= -1;
+		}
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
-		Vector3 moveForward = cameraForward * moveDir.z + Camera.main.transform.right * moveDir.x;
+		Vector3 moveForward = cameraForward * moveDir.z + cameraTransform.right * moveDir.x;
 
-		playerModel.LookAt(myTransform.position + moveForward.normalized);
+		playerModel.LookAt(myTransform.position + moveForward.normalized);*/
 
-		myTransform.Translate(moveForward * moveSpeed * Time.deltaTime);
+		myTransform.Translate(moveDir * moveSpeed * Time.deltaTime);
 
 		//rigidbody.velocity = moveDir * moveSpeed * Time.deltaTime;
 	}
@@ -189,6 +195,20 @@ public class PlayerController : BaseObject
 	public void ThrowAway(Hand hand)
 	{
 		armedManager.ThrowAway(hand);
+	}
+
+	public void Damage(int damage)
+	{
+		hp -= damage;
+		if(hp<= 0)
+		{
+			hp = 0;
+		}
+	}
+
+	public void SetUp(Vector3 pos)
+	{
+
 	}
 
 }

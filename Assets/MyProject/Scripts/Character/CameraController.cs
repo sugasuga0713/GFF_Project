@@ -14,9 +14,12 @@ public class CameraController : ManagedUpdateBehaviour
 	#region パラメータ
 	[Header("回転速度")] [SerializeField] private float rotateSpeed = 1.0f;
 	[Header("追従のなめらかさ")] [SerializeField] private float smoothing = 5f;
+	[Header("カメラとの距離")] [SerializeField] private float radius = 5;
+	[Header("縦方向の回転上限")] [SerializeField] [Range(0,90)] private float upperLimit = 45;
+	[Header("縦方向の回転下限")] [SerializeField] [Range(-30,0)] private float lowerLimit = -2;
+
 	private Vector3 angle;
 	private Vector3 offset;
-	[Header("カメラとの近さ")] [SerializeField] private float radius = 5;
 
 	private Vector2 inputAngle = Vector2.zero;
 	private bool subjectiveMode = false; //主観視点かどうか
@@ -41,7 +44,7 @@ public class CameraController : ManagedUpdateBehaviour
 		base.Initialize();
 		offset = myTransform.position - playerTransform.position;
 		offset.z = 0;
-		///radius = Vector3.Distance(playerTransform.position, myTransform.position);
+		//radius = Vector3.Distance(playerTransform.position, myTransform.position);
 	}
 
 	/// <summary>
@@ -85,6 +88,7 @@ public class CameraController : ManagedUpdateBehaviour
 	{
 		angle.y += x * rotateSpeed;
 		angle.x += y * rotateSpeed;
+		angle.y = Mathf.Clamp(angle.y, lowerLimit, upperLimit);
 		inputAngle.x = x;
 		inputAngle.y = y;
 	}

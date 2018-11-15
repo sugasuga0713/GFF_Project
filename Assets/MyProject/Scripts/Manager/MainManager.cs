@@ -7,15 +7,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainManager : ManagedUpdateBehaviour
+public class MainManager : SingletonMonoBehaviour<MainManager>
 {
 	#region 変数
 
 	#region パラメータ
+	private int players = 2; //プレイ人数
 	private bool gameEnd = false;
 	#endregion
 
 	#region キャッシュ
+	[SerializeField] private CharacterManager characterManager = null;
 	[SerializeField] private TimeManager timeManager = null;
 	[SerializeField] private UIManager uiManager= null;
 	#endregion
@@ -29,9 +31,10 @@ public class MainManager : ManagedUpdateBehaviour
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	protected override void Initialize()
+	protected override void Init()
     {
         base.Initialize();
+		//characterManager.CharacterSetUp();
     }
 
 	/// <summary>

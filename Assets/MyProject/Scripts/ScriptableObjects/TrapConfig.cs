@@ -3,11 +3,10 @@
 //機能　　　　：
 //最終更新日　：
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapConfig : WeaponConfig
+[CreateAssetMenu]
+public class TrapConfig : ScriptableObject
 {
 	#region 変数
 

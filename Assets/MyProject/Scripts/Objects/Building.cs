@@ -16,6 +16,8 @@ public class Building : ManagedUpdateBehaviour
 	#endregion
 
 	#region キャッシュ
+	[SerializeField] private GameObject dynamicObject = null;
+	//[SerializeField] private GameObject staticObject = null;
 	[SerializeField] private Transform childTrans = null;
 	[SerializeField] private Rigidbody childRbs = null;
 	#endregion
@@ -48,5 +50,17 @@ public class Building : ManagedUpdateBehaviour
 	public override void FixedUpdateMe()
 	{
 
+	}
+
+	public void Impact()
+	{
+		dynamicObject.SetActive(true);
+		dynamicObject.transform.parent = null;
+		this.gameObject.SetActive(false);
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		Impact();
 	}
 }

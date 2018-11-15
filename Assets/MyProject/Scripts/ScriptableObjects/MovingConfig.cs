@@ -3,8 +3,6 @@
 //機能　　　　：
 //最終更新日　：
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]

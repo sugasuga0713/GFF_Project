@@ -10,7 +10,7 @@ public class UpdateManager : SingletonMonoBehaviour<UpdateManager> {
 	private int i;
 	public int arraySize;
 
-	private void Awake()
+	protected override void Init()
 	{
 		arraySize = scripts.Length;
 	}
