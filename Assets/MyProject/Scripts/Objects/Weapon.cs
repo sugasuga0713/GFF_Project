@@ -22,12 +22,10 @@ public class Weapon : BaseObject
 
 	public WeaponConfig weaponConfig;
 
-	private Transform opponentTransform;
-
 	#endregion
 
 	#region キャッシュ
-
+	private PlayerController playerController;
 	#endregion
 
 	#region プロパティ
@@ -100,9 +98,9 @@ public class Weapon : BaseObject
 	/// <summary>
 	/// 武器の使用
 	/// </summary>
-	public virtual void Action()
+	public virtual void Action(PlayerController i_playerController)
 	{
-
+		playerController = i_playerController;
 	}
 
 	/// <summary>

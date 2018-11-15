@@ -79,8 +79,9 @@ public class Trap : Weapon
 	/// <summary>
 	/// 武器の使用
 	/// </summary>
-	public override void Action()
+	public override void Action(PlayerController i_playerController)
 	{
+		base.Action(i_playerController);
 		inAction = true;
 	}
 

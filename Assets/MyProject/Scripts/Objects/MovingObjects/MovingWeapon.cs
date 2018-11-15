@@ -61,8 +61,10 @@ public class MovingWeapon : Weapon
 	/// <summary>
 	/// 武器の使用
 	/// </summary>
-	public override void Action()
+	public override void Action(PlayerController i_playerController)
 	{
+		base.Action(i_playerController);
+
 		if (!hasEnergy) return;
 		canMove = true;
 		burner.SetActive(true);

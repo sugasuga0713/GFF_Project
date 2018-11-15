@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 236187136}
   - component: {fileID: 236187135}
   m_Layer: 5
-  m_Name: Image
+  m_Name: AimImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2670,7 +2670,7 @@ MonoBehaviour:
   smoothing: 5
   distance: 5
   upperLimit: 45
-  lowerLimit: -30
+  lowerLimit: -40
   playerTransform: {fileID: 2038635318}
   viewPoint: {fileID: 1115356363}
   myParent: {fileID: 1280328390}
@@ -2877,7 +2877,7 @@ MonoBehaviour:
   smoothing: 5
   distance: 5
   upperLimit: 45
-  lowerLimit: -30
+  lowerLimit: -40
   playerTransform: {fileID: 96658852}
   viewPoint: {fileID: 953770561}
   myParent: {fileID: 2000151119}

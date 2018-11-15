@@ -171,7 +171,7 @@ public class PlayerController : BaseObject
 		if (!armedManager.hasHand[handNo]) return;
 
 		//持っているもののスクリプトを参照し、アクション処理を行う
-		armedManager.handWeapons[handNo].Action();
+		armedManager.handWeapons[handNo].Action(this);
 	}
 
 	public void EndAction(Hand hand)
