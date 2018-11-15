@@ -22,7 +22,7 @@ public class PlayerController : BaseObject
 	[Header("重量")] [SerializeField] private float weight = 1;
 	[Header("総重量(kg)")] [SerializeField] private float grossWeight = 300;
 
-	private bool canControl = false;
+	private bool canControl = true;
 	private Vector3 moveDir;
 
 	#endregion
