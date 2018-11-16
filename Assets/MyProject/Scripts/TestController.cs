@@ -6,7 +6,8 @@ public class TestController : MonoBehaviour
 	private Transform m_target = null;
 	private Rigidbody m_rigidbody;
 
-	[SerializeField] [Range(1,50)] private float height = 30;
+	//[Header("射出角度")] [SerializeField] [Range(0, 90)] private float angle = 80;
+	[Header("最大高度")] [SerializeField] [Range(0, 10)] private float height = 30;
 
 	public void Shoot(Vector3 i_targetPosition,Vector3 i_shootPosition,Rigidbody rigidbody)
 	{
@@ -138,38 +139,6 @@ public class TestController : MonoBehaviour
 		float v_y = (y - y0) / t + (g * t) / 2;
 
 		return new Vector2(v_x, v_y);
-	}
-
-	private float ComputeVectorFromAngle(Vector3 i_targetPosition, float i_angle)
-	{
-		// xz平面の距離を計算。
-		Vector2 startPos = new Vector2(m_shootPoint.x, m_shootPoint.z);
-		Vector2 targetPos = new Vector2(i_targetPosition.x, i_targetPosition.z);
-		float distance = Vector2.Distance(targetPos, startPos);
-
-		float x = distance;
-		float g = Physics.gravity.y;
-		float y0 = m_shootPoint.y;
-		float y = i_targetPosition.y;
-
-		// Mathf.Cos()、Mathf.Tan()に渡す値の単位はラジアンだ。角度のまま渡してはいけないぞ！
-		float rad = i_angle * Mathf.Deg2Rad;
-
-		float cos = Mathf.Cos(rad);
-		float tan = Mathf.Tan(rad);
-
-		float v0Square = g * x * x / (2 * cos * cos * (y - y0 - x * tan));
-
-		// 負数を平方根計算すると虚数になってしまう。
-		// 虚数はfloatでは表現できない。
-		// こういう場合はこれ以上の計算は打ち切ろう。
-		if (v0Square <= 0.0f)
-		{
-			return 0.0f;
-		}
-
-		float v0 = Mathf.Sqrt(v0Square);
-		return v0;
 	}
 
 	private Vector3 ConvertVectorToVector3(float i_v0, float i_angle, Vector3 i_targetPosition)

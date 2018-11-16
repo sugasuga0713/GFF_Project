@@ -70,7 +70,7 @@ public class Gun : Weapon
 
 	protected void Shot()
 	{
-		BaseBullet bullet = bulletManager.GetBullet(gunConfig.bulletType);
+		BaseBullet bullet = bulletManager.CreateBullet(gunConfig.bulletType);
 		if (bullet == null) return;
 
 		remBullets--;

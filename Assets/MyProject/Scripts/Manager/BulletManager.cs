@@ -22,7 +22,9 @@ public class BulletManager : ManagedUpdateBehaviour
 	[System.SerializableAttribute]
 	public class ValueList
 	{
-		public List<BaseBullet> list = new List<BaseBullet>();
+		[System.NonSerialized] public List<BaseBullet> list = new List<BaseBullet>();
+		[System.NonSerialized] public Transform parent = null;
+		public GameObject bulletPrefab = null;
 	}
 
 	//Inspectorに表示される
@@ -80,5 +82,32 @@ public class BulletManager : ManagedUpdateBehaviour
 			}
 		}
 		return null;
+	}
+
+	public BaseBullet CreateBullet(BulletType bulletType)
+	{
+		int bulletNo = (int)bulletType;
+		if (bulletNo == -1) return null;
+
+		int count = bulletList[bulletNo].list.Count;
+		for (i = 0; i < count; i++)
+		{
+			if (!bulletList[bulletNo].list[i].ActiveSelf())
+			{
+				return bulletList[bulletNo].list[i];
+			}
+		}
+		if (bulletList[bulletNo].list.Count == 0)
+		{
+			GameObject obj = new GameObject(bulletType.ToString());
+			obj.transform.parent = myTransform;
+			bulletList[bulletNo].parent = obj.transform;
+		}
+		GameObject instance = Instantiate(bulletList[bulletNo].bulletPrefab) as GameObject;
+		BaseBullet bulletScript = instance.GetComponent<BaseBullet>();
+		instance.SetActive(false);
+		instance.transform.parent = bulletList[bulletNo].parent;
+		bulletList[bulletNo].list.Add(bulletScript);
+		return bulletScript;
 	}
 }

@@ -16,12 +16,7 @@ public class UpwardCannonBullets : BaseBullet
 
 	#region キャッシュ
 	private new Rigidbody rigidbody;
-	[SerializeField] RigidBodySupport bodySupport = null;
-	[SerializeField] private Transform targetTransform = null;
-	[Header("射出角度")] [SerializeField] [Range(0, 90)] private float angle = 80;
-	[Header("最大高度")] [SerializeField] [Range(0,10)]  private float height= 10;
 
-	[SerializeField] private TestController test = null;
 	#endregion
 
 	#endregion
@@ -46,8 +41,7 @@ public class UpwardCannonBullets : BaseBullet
 			lifeTimeCount = lifeTime;
 			myTransform.position = gunTransform.position;
 			gameObject.SetActive(true);
-			rigidbody.velocity = Vector3.zero;
-			test.Shoot(new Vector3(0,0,0), myTransform.position,rigidbody);
+			rigidbody.Ballistic(myTransform.position, Vector3.zero ,30);
 		}
 	}
 
