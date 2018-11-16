@@ -82,6 +82,18 @@ public class PlayerController : BaseObject
 		}
 	}
 
+	public bool CanControl
+	{
+		get
+		{
+			return canControl;
+		}
+		set
+		{
+			canControl = value;
+		}
+	}
+
     #endregion
 
     /// <summary>

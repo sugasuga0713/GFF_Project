@@ -48,6 +48,7 @@ public class TimeManager : ManagedUpdateBehaviour
     /// </summary>
     public bool UpdateTime()
     {
+		Debug.Log("TimeManager");
 
 		timer += Time.deltaTime;
 		if(timer >= 1)

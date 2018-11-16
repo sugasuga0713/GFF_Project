@@ -33,16 +33,11 @@ public class UpwardCannonBullets : BaseBullet
         base.Initialize();
 		rigidbody = GetComponent<Rigidbody>();
     }
-	public override void Setting(Transform gunTransform)
+	public override void Setting(Transform gunTransform, PlayerController pController)
 	{
-		{
-			if (myTransform == null) myTransform = GetComponent<Transform>();
-
-			lifeTimeCount = lifeTime;
-			myTransform.position = gunTransform.position;
-			gameObject.SetActive(true);
-			rigidbody.Ballistic(myTransform.position, Vector3.zero ,30);
-		}
+		base.Setting(gunTransform, pController);
+		myTransform.eulerAngles = Vector3.zero;
+		rigidbody.Ballistic(myTransform.position, CharacterManager.Instance.ReturnOpponentPosition(playerController), 30);
 	}
 
 	private void OnTriggerEnter(Collider other)

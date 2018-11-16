@@ -65,7 +65,7 @@ public class PlayerInputContorller : ManagedUpdateBehaviour
 	private void CheckGamePad()
 	{
 		var controllerNames = Input.GetJoystickNames();
-		Debug.Log(controllerNames.Length);
+//		Debug.Log(controllerNames.Length);
 
 		// ゲームパッドが接続されていないときは変数をfalse、接続されているときはtrueにする
 		if (controllerNames.Length == 0)

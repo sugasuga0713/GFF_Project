@@ -42,6 +42,7 @@ public class MainManager : SingletonMonoBehaviour<MainManager>
 	/// </summary>
 	public override void UpdateMe()
 	{
+		Debug.Log("MainManager");
 		if (!timeManager.UpdateTime())
 			gameEnd = true;
 

@@ -73,6 +73,7 @@ public class Trap : Weapon
 		inAction = false;
 		isBuried = true;
 		IsBroken = true;
+		playerController.CanControl = true;
 
 	}
 
@@ -83,6 +84,7 @@ public class Trap : Weapon
 	{
 		base.Action(i_playerController);
 		inAction = true;
+		playerController.CanControl = false;
 	}
 
 	public override void EndAction()

@@ -47,6 +47,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviourWithInit where T : MonoBeh
 
 	protected sealed override void Awake()
 	{
+		base.Awake();
 		//存在しているインスタンスが自分であれば問題なし
 		if (this == Instance)
 		{
@@ -87,6 +88,9 @@ public class MonoBehaviourWithInit : ManagedUpdateBehaviour
 	protected virtual void Init() { }
 
 	//sealed overrideするためにvirtualで作成
-	protected override void Awake() { }
+	protected override void Awake()
+	{
+		base.Awake();
+	}
 
 }

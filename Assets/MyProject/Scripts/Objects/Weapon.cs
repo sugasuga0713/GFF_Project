@@ -25,7 +25,7 @@ public class Weapon : BaseObject
 	#endregion
 
 	#region キャッシュ
-	private PlayerController playerController;
+	protected PlayerController playerController;
 	#endregion
 
 	#region プロパティ

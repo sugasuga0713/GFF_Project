@@ -902,7 +902,8 @@ MonoBehaviour:
   bulletList:
   - bulletPrefab: {fileID: 1606048222745004, guid: 8cb45f39767567c43a0424abc9ac7097,
       type: 2}
-  - bulletPrefab: {fileID: 0}
+  - bulletPrefab: {fileID: 1168008553863982, guid: 4daf2dbe9fac34b4ea2a28f3044f2528,
+      type: 2}
 --- !u!1 &483779594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c8f1229127cb74ba1ffc3e9c44600e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterManager: {fileID: 0}
+  characterManager: {fileID: 1335243442}
   timeManager: {fileID: 1038207600}
   uiManager: {fileID: 2043569076}
 --- !u!1 &953770560
@@ -2697,11 +2698,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2038635318}
+  - {fileID: 96658852}
   playerScripts:
   - {fileID: 2038635320}
-  - {fileID: 0}
+  - {fileID: 96658854}
 --- !u!1 &1367433476
 GameObject:
   m_ObjectHideFlags: 0
@@ -3304,7 +3305,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 000
+  m_Text: 180
 --- !u!222 &1962360996
 CanvasRenderer:
   m_ObjectHideFlags: 0

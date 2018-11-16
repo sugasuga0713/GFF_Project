@@ -74,7 +74,7 @@ public class Gun : Weapon
 		if (bullet == null) return;
 
 		remBullets--;
-		bullet.Setting(shotPosition);
+		bullet.Setting(shotPosition,playerController);
 	}
 
 	protected void MisFire()

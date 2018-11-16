@@ -18,6 +18,7 @@ public class BaseBullet : ManagedUpdateBehaviour
 	#endregion
 
 	#region キャッシュ
+	protected PlayerController playerController;
 	#endregion
 
 	#endregion
@@ -55,8 +56,9 @@ public class BaseBullet : ManagedUpdateBehaviour
 		//Move();
 	}
 
-	public virtual void Setting(Transform gunTransform)
+	public virtual void Setting(Transform gunTransform,PlayerController pController)
 	{
+		playerController = pController;
 		if (myTransform == null) myTransform = GetComponent<Transform>();
 		lifeTimeCount = lifeTime;
 		myTransform.position = gunTransform.position;

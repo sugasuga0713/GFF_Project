@@ -35,4 +35,14 @@ public class CharacterManager : SingletonMonoBehaviour<CharacterManager>
 			playerScripts[i].SetUp(playerPos[i].position);
 		}
 	}
+
+	public Vector3 ReturnOpponentPosition(PlayerController pController)
+	{
+		if (pController == playerScripts[0])
+			return playerPos[1].position;
+		else
+			return playerPos[0].position;
+
+	}
+
 }
