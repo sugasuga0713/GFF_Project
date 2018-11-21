@@ -1,0 +1,31 @@
+コーディング規約
+
+スクリプトテンプレートについて
+
+○導入
+Unityをインストールしたフォルダ\Unity\Editor\Data\Resources\ScriptTemplates
+に「81C-C# UpdateScript-UpdateBehaviour.cs.txt」をコピー
+
+○使い方
+
+・Update処理を行う場合はManagedUpdateBehaviourを継承し、
+「Initialize関数」内に初期化処理、「UpdateMe関数」内にUpdate処理、
+「FixedUpdateMe」関数内にFixedUpdate処理を記述する。
+
+・ステータス等のパラメータは
+　　#region パラメータ
+   　　//ここに記述する。
+　　#endregion
+
+・キャッシュは
+　　#region キャッシュ
+   　　//ここに記述する。
+　　#endregion
+
+・プロパティは
+
+　　#region パラメータ
+   　　//ここに記述する。
+　　#endregion
+
+・HPやパワー、スピードなどを外部から参照する場合は、プロパティを使う。
